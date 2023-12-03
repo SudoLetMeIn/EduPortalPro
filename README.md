@@ -1,1 +1,1 @@
-# Academy-teachers-portal
+EduPortalPro is a powerful and user-friendly web application designed for teachers in Academic intituition. Streamline your administrative tasks by effortlessly registering and managing student information. With an intuitive interface, EduPortalPro automates calculations, making it easy for teachers to focus on what they do best – teaching. Experience seamless connectivity between educators and students with our all-in-one platform, fostering an efficient and collaborative learning environment.
