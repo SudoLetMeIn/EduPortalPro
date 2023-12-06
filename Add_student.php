@@ -28,7 +28,7 @@ echo "<style>
     body {
         margin: 0;
         font-family: 'Arial', sans-serif;
-        font-size: 24px;
+        font-size: 90%;
         font-weight: bolder;
         color: #000;
         text-align: center;
@@ -82,6 +82,10 @@ echo "<style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    <script src="read.js"></script>
+
+
     <style>
         body {
             margin: 0;
@@ -142,6 +146,7 @@ echo "<style>
 
     <input type="submit" id="submit" name="submit" value="Submit">
 </form>
+<script src="read.js"></script>
 </div>
 <script>
     function checkFile() {
@@ -182,21 +187,23 @@ function isUniqueData($conn, $name, $class) {
 }
 function insert($name,$telephone,$class,$monthly_pay,$payment_left,$conn):int{
     $id=0;
-try{
-$sql = "INSERT INTO `students` (`id`, `name`, `phone` , `class`, `monthly_pay`, `payment_left`, `enrolled_date`, `total_months`) 
-        VALUES (null, ?, ?, ?, ?, ?, current_timestamp(), 1)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("sssss", $name, $telephone, $class, $monthly_pay, $payment_left);
-$stmt->execute();
-$id = $conn->insert_id;
-}catch(mysqli_sql_exception){
-    echo "Unable to create new student!!";
+    try{
+    $sql = "INSERT INTO `students` (`id`, `name`, `phone` , `class`, `monthly_pay`, `payment_left`, `enrolled_date`, `total_months`) 
+            VALUES (null, ?, ?, ?, ?, ?, current_timestamp(), 1)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssss", $name, $telephone, $class, $monthly_pay, $payment_left);
+    $stmt->execute();
+    $id = $conn->insert_id;
+    }catch(mysqli_sql_exception){
+        echo "Unable to create new student!!";
+    }
+    return $id;
 }
-return $id;
-}
+
 if(isset($_POST['submit'])){
     if(!empty($_POST['name']) && !empty($_POST['telephone']) && !empty($_POST['class']) && !empty($_POST['monthly_pay'])){
         $name = mysqli_real_escape_string($conn, $_POST['name']);
+        $name = trim($name);
         $class = mysqli_real_escape_string($conn, $_POST['class']);
         $monthly_pay = mysqli_real_escape_string($conn, $_POST['monthly_pay']);
         $telephone = mysqli_real_escape_string($conn, $_POST['telephone']);
@@ -209,9 +216,20 @@ if(isset($_POST['submit'])){
         } else{
             write("Unable to create new user","");
         }
-    }elseif(!empty($_FILES['excel'])){
-    include "readExcel.php";
-    operation($_FILES['excel'],$conn);
+    }elseif ($_FILES['excel']['error'] === UPLOAD_ERR_OK) {
+        $sourceFolder = 'uploads/';
+        $tempFilePath = $_FILES['excel']['tmp_name'];
+        $originalFileName = "input.xlsx";
+        $destinationPath = $sourceFolder . $originalFileName;
+    
+        if (move_uploaded_file($tempFilePath, $destinationPath)) {
+            write( "File successfully saved to source folder.","");
+            echo "<script>processUploadedExcelFile();</script>";
+        } else {
+            write("Error moving file to source folder.","");
+        }
+    } else {
+        write("File upload failed with error code: " . $_FILES['excel']['error'],"");
     }
 }
 ?>
