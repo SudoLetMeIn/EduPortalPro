@@ -118,11 +118,11 @@ function write($r,$id):void{
     window.onload = showPopup;
   </script>";
 
- echo "<style>
+echo "<style>
     body {
         margin: 0;
         font-family: 'Arial', sans-serif;
-        font-size: 24px;
+        font-size: 90%;
         font-weight: bolder;
         color: #000;
         text-align: center;

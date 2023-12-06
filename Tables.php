@@ -6,7 +6,7 @@ function displayTablePopup($header, $data): void {
             body {
                 margin: 0;
                 font-family: "Arial", sans-serif;
-                font-size: 24px;
+                font-size: 90%;
                 font-weight: bolder;
                 color: #000;
                 text-align: center;
@@ -212,11 +212,11 @@ function write($r,$id):void{
     window.onload = showPopup;
   </script>";
 
-    echo "<style>
+echo "<style>
     body {
         margin: 0;
         font-family: 'Arial', sans-serif;
-        font-size: 24px;
+        font-size: 90%;
         font-weight: bolder;
         color: #000;
         text-align: center;
@@ -376,14 +376,7 @@ function generateStyledClassSquares($conn) {
 </body>
 </html>
 <?php
-function print2DArray($array) {
-    foreach ($array as $row) {
-        foreach ($row as $element) {
-            echo $element . " ";
-        }
-        echo "<br>";
-    }
-}
+
 function isPhone():bool {
     $isMobile = (isset($_SERVER['HTTP_USER_AGENT']) && 
                   (strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile') !== false || 
