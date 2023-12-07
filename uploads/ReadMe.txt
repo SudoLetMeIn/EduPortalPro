@@ -27,9 +27,9 @@ The `input.xlsx` file should contain a sheet named "Sheet1" with the following a
 Consider the following example entries in the spreadsheet:
 
 | Name          | Phone         | Class      | Monthly Pay | Payment Left | Enrolled Date | Total Months |
-| ------------- | ------------- | ---------- | ------------ | ------------- | ------------- | ------------ |
-| John Doe      | 123456789     | Math       | 100          | 5             | 2022-01-01    | 12           |
-| Jane Smith    | 987654321     | Science    | 120          | 8             | 2022-02-15    | 10           |
+| ------------- | ------------- | ---------- | ----------- | ------------ | ------------- | ------------ |
+| John Doe      | 123456789     | Math       | 100         | 5            | 2022-01-01    | 12           |
+| Jane Smith    | 987654321     | Science    | 120         | 8            | 2022-02-15    | 10           |
 
 In this example, there are two students, each with their respective attributes.
 
