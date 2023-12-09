@@ -9,5 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($_POST as $key => $query) {
         execute($conn,$query);
     }
+    unlink("uploads/input.xlsx");
 }
 ?>
